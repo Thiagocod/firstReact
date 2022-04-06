@@ -15,6 +15,18 @@ type FirebaseQuestions = Record<string,{
     authorId: string;
     }>
 }>
+type FirebaseLikes = Record<string,{
+    author:{
+        authorId: string;
+        questionId: string
+    }
+}>
+
+type LikesType = {
+    likeCount: number;
+    likeId: string | undefined;
+}
+
 type QuestionType = {
     id: string;
     author:{
@@ -55,7 +67,6 @@ export function useRoom(roomId: string){
             setTitle(databaseRoom.title);
             setQuestions(parsedQuestions); 
         });
-
         return () =>{
             roomRef.off('value');
         }
