@@ -44,6 +44,7 @@ export function Room(){
         }
         
         const question = {
+            roomId: roomId,
             content: newQuestion,
             author:{
                 name: user.name,
