@@ -4,6 +4,7 @@ import { useAuth } from "./useAuth";
 
 
 type FirebaseQuestions = Record<string,{
+    roomId: string;
     author:{
         name: string;
         avatar: string;
