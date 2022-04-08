@@ -1,4 +1,6 @@
+import { getValue } from "@testing-library/user-event/dist/utils";
 import { useEffect, useState } from "react";
+import { Question } from "../components/Question";
 import { database } from "../services/firebase";
 import { useAuth } from "./useAuth";
 
@@ -29,6 +31,7 @@ type LikesType = {
 }
 type QuestionType = {
     id: string;
+    roomId: string;
     author:{
     name: string;
     avatar: string;
@@ -47,29 +50,35 @@ export function useRoom(roomId: string){
     const [questions, setQuestions] = useState<QuestionType[]>([]);
 
     useEffect(()=>{
-        const roomRef = database.ref(`rooms/${roomId}`);
+        const questionRef = database.ref(`/questions`);
+        
 
-        roomRef.on('value', room =>{
-            const databaseRoom = room.val();
-            const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
+        questionRef.on('value', question =>{
+            const databasQuestions = question.val();
+            const firebaseQuestions: FirebaseQuestions = databasQuestions ?? {};
 
             const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value])=>{
-                return{
+                    return{
                     id:key,
+                    roomId: value.roomId,
                     content: value.content,
                     author: value.author,
                     isHighLighted: value.isHighLighted,
                     isAnswered: value.isAnswered,
                     likeCount:Object.values(value.likes ?? {}).length,
                     likeId: Object.entries(value.likes ?? {}).find(([key, like]) => like.authorId === user?.id)?.[0],
-                }
+                    }
             });
-            setTitle(databaseRoom.title);
-            setQuestions(parsedQuestions); 
+            function isMyRoom(value:QuestionType){
+                return value.roomId == roomId;
+            }
+            const parsedfilterQuetions = parsedQuestions.filter(isMyRoom);
+
+            setQuestions(parsedfilterQuetions);
         });
 
         return () =>{
-            roomRef.off('value');
+            questionRef.off('value');
         }
 
     }, [roomId, user?.id]);
