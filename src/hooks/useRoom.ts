@@ -51,8 +51,13 @@ export function useRoom(roomId: string){
 
     useEffect(()=>{
         const questionRef = database.ref(`/questions`);
+        const roomRef = database.ref(`/rooms/${roomId}`) 
         
-
+        roomRef.on('value',room =>{
+            const myRoom = room.val();
+            setTitle(myRoom.title);
+        });
+        
         questionRef.on('value', question =>{
             const databasQuestions = question.val();
             const firebaseQuestions: FirebaseQuestions = databasQuestions ?? {};
@@ -73,7 +78,6 @@ export function useRoom(roomId: string){
                 return value.roomId == roomId;
             }
             const parsedfilterQuetions = parsedQuestions.filter(isMyRoom);
-
             setQuestions(parsedfilterQuetions);
         });
 
