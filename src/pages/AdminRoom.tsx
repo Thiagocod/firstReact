@@ -77,7 +77,7 @@ export function AdminRoom(){
                 </div>
                 
                 <div className="question-list">
-
+                { questions.length <=0 && <div><h2>Você ainda não possui perguntas</h2></div> }
                 {questions.map(question=>{
                     return(
                         <Question
