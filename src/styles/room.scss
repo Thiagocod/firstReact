@@ -1,3 +1,4 @@
+@import 'colors.scss';
 #page-room{
     header {
         padding: 24px;
@@ -36,7 +37,7 @@
         
         span{
             margin-left: 16px;
-            background: #e559f9;
+            background: var(--color-first1);
             border-radius: 9999px;
             padding: 8px 16px;
             color: #fff;

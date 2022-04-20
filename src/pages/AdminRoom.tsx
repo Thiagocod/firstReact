@@ -11,7 +11,6 @@ import { database } from '../services/firebase';
 import { Button } from "../components/Button";
 import { Question } from '../components/Question';
 import { RoomCode } from "../components/Roomcode";
-import { useAuth } from '../hooks/useAuth';
 import { useRoom } from '../hooks/useRoom';
 // import { database } from '../services/firebase';
 import "../styles/room.scss";
@@ -38,18 +37,18 @@ export function AdminRoom(){
     
     async function handleDeleteQuestion(questionId: string){
         if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')){
-            await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
+            await database.ref(`questions/${questionId}`).remove();
             
         }
         
     }
     async function handleCheckQuestionAsAnswered(questionId:string) {
-        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+        await database.ref(`questions/${questionId}`).update({
             isAnswered: true,
         });
     }
     async function handleHighLightQuestion(questionId:string) {
-        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+        await database.ref(`questions/${questionId}`).update({
             isHighLighted: true,
         });
     }
@@ -77,7 +76,7 @@ export function AdminRoom(){
                 </div>
                 
                 <div className="question-list">
-
+                { questions.length <=0 && <div><h2>Você ainda não possui perguntas</h2></div> }
                 {questions.map(question=>{
                     return(
                         <Question

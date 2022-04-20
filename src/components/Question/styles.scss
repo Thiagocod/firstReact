@@ -1,3 +1,4 @@
+@import url('../../styles/colors.scss');
 .question{
     background: #fefefe;
     border-radius: 8px;
@@ -59,9 +60,9 @@
             color: #737380;
             gap: 8px;
             &.liked{
-            color: #835afd;
+            color: var(--color-third2);
             svg path {
-                stroke: #835afd;
+                stroke: var(--color-third2);
                     }   
                 }
             }
