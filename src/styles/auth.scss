@@ -1,3 +1,4 @@
+@import 'colors.scss';
 #page-auth{
     display: flex;
     align-items: stretch ;
@@ -5,7 +6,7 @@
 
     aside{
         flex: 7;
-        background: #835afd;
+        background: var(--color-second2);
         color: #fff;
         
         display: flex;
