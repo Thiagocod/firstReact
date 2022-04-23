@@ -1,6 +1,4 @@
-import { getValue } from "@testing-library/user-event/dist/utils";
 import { useEffect, useState } from "react";
-import { Question } from "../components/Question";
 import { database } from "../services/firebase";
 import { useAuth } from "./useAuth";
 
