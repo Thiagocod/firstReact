@@ -20,7 +20,7 @@ Under development
 
 ## Project preview:
   
-  ![Letmeask_maker](https://user-images.githubusercontent.com/65191024/162545855-807c136d-af7d-4be5-83d0-5b7ce82a30a9.gif)
+  ![Pergunte-me](https://user-images.githubusercontent.com/65191024/165089049-b9b47636-3802-4f37-8a95-4c4937e82314.gif)
   
 ## Deploy:
 
